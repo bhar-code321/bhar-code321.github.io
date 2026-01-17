@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!-- This tells the browser this is an HTML5 document -->
+<html lang="en">
+<!-- The lang="en" attribute specifies this page is in English -->
+
+<head>
+    <!-- The <head> section contains information ABOUT the page, not displayed content -->
+    
+    <!-- This sets the character encoding to UTF-8, which supports all languages and symbols -->
+    <meta charset="UTF-8">
+    
+    <!-- This makes the website responsive (work well on mobile phones and tablets) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- This is what appears in the browser tab -->
+    <title>My Blog & Links</title>
+    
+    <!-- The <style> tag contains all the CSS (styling) for the page -->
+    <style>
+        /* This resets default browser spacing and sets a base font */
+        * {
+            margin: 0; /* Removes default spacing around elements */
+            padding: 0; /* Removes default inner spacing */
+            box-sizing: border-box; /* Makes width/height calculations easier */
+        }
+
+        /* Styles for the entire page body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sets the font */
+            line-height: 1.6; /* Spacing between lines of text */
+            color: #333; /* Dark gray text color */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient background */
+            min-height: 100vh; /* Makes sure the page is at least as tall as the screen */
+            padding: 20px; /* Adds space around the edges */
+        }
+
+        /* Styles for the main container that holds all content */
+        .container {
+            max-width: 800px; /* Maximum width of the content area */
+            margin: 0 auto; /* Centers the container horizontally */
+            background: white; /* White background for the content area */
+            border-radius: 20px; /* Rounds the corners */
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3); /* Adds a shadow for depth */
+            overflow: hidden; /* Keeps content from spilling outside rounded corners */
+        }
+
+        /* Styles for the header (top section) */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Same gradient as body */
+            color: white; /* White text */
+            padding: 60px 40px; /* Space inside the header (top/bottom, left/right) */
+            text-align: center; /* Centers the text */
+        }
+
+        /* Styles for the main heading (your name/blog title) */
+        h1 {
+            font-size: 2.5em; /* Makes the text 2.5 times the normal size */
+            margin-bottom: 10px; /* Space below the heading */
+            font-weight: 700; /* Makes the text bold */
+        }
+
+        /* Styles for the subtitle/tagline */
+        .tagline {
+            font-size: 1.2em; /* Slightly larger than normal text */
+            opacity: 0.9; /* Slightly transparent (90% visible) */
+        }
+
+        /* Styles for the main content area */
+        main {
+            padding: 40px; /* Space inside the main content area */
+        }
+
+        /* Styles for section headings (like "About Me", "Blog Posts") */
+        h2 {
+            color: #667eea; /* Purple color matching the theme */
+            margin-bottom: 20px; /* Space below the heading */
+            font-size: 1.8em; /* Size of the heading */
+            border-bottom: 3px solid #667eea; /* Underline effect */
+            padding-bottom: 10px; /* Space between text and underline */
+        }
+
+        /* Styles for sections (About, Blog Posts, Links) */
+        section {
+            margin-bottom: 40px; /* Space between sections */
+        }
+
+        /* Styles for the about text paragraph */
+        .about-text {
+            font-size: 1.1em; /* Slightly larger than normal */
+            color: #555; /* Medium gray color */
+            line-height: 1.8; /* Extra space between lines for readability */
+        }
+
+        /* Styles for individual blog post cards */
+        .blog-post {
+            background: #f8f9fa; /* Light gray background */
+            padding: 25px; /* Space inside the card */
+            margin-bottom: 20px; /* Space between blog posts */
+            border-radius: 10px; /* Rounded corners */
+            border-left: 4px solid #667eea; /* Purple accent line on the left */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation when hovering */
+        }
+
+        /* What happens when you hover over a blog post */
+        .blog-post:hover {
+            transform: translateY(-5px); /* Moves the card up slightly */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Adds a shadow */
+        }
+
+        /* Styles for blog post titles */
+        .blog-post h3 {
+            color: #333; /* Dark gray */
+            margin-bottom: 10px; /* Space below the title */
+            font-size: 1.4em; /* Size of the title */
+        }
+
+        /* Styles for blog post dates */
+        .blog-date {
+            color: #888; /* Light gray */
+            font-size: 0.9em; /* Smaller than normal text */
+            margin-bottom: 10px; /* Space below the date */
+        }
+
+        /* Styles for blog post preview text */
+        .blog-excerpt {
+            color: #666; /* Medium gray */
+            line-height: 1.6; /* Space between lines */
+        }
+
+        /* Styles for the links section */
+        .links-grid {
+            display: grid; /* Uses CSS Grid layout */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Creates responsive columns */
+            gap: 15px; /* Space between link cards */
+        }
+
+        /* Styles for individual link cards */
+        .link-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+            color: white; /* White text */
+            padding: 20px; /* Space inside the card */
+            border-radius: 10px; /* Rounded corners */
+            text-align: center; /* Centers the text */
+            text-decoration: none; /* Removes underline from links */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+            display: block; /* Makes the entire card clickable */
+        }
+
+        /* What happens when you hover over a link card */
+        .link-card:hover {
+            transform: translateY(-5px); /* Moves up */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Adds shadow */
+        }
+
+        /* Styles for link card titles */
+        .link-card h3 {
+            margin-bottom: 5px; /* Space below title */
+            font-size: 1.2em; /* Size of title */
+        }
+
+        /* Styles for link card descriptions */
+        .link-card p {
+            font-size: 0.9em; /* Smaller text */
+            opacity: 0.9; /* Slightly transparent */
+        }
+
+        /* Styles for the footer */
+        footer {
+            background: #f8f9fa; /* Light gray background */
+            text-align: center; /* Centers the text */
+            padding: 30px; /* Space inside footer */
+            color: #666; /* Medium gray text */
+        }
+
+        /* Makes the website responsive on small screens (phones) */
+        @media (max-width: 600px) {
+            /* Smaller header padding on mobile */
+            header {
+                padding: 40px 20px;
+            }
+
+            /* Smaller main heading on mobile */
+            h1 {
+                font-size: 2em;
+            }
+
+            /* Smaller content padding on mobile */
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- This is where the visible content starts -->
+    
+    <!-- Main container for all content -->
+    <div class="container">
+        
+        <!-- Header section (top of the page) -->
+        <header>
+            <!-- Main title - CHANGE THIS to your name or blog title -->
+            <h1>Welcome to My Blog</h1>
+            <!-- Subtitle - CHANGE THIS to your tagline -->
+            <p class="tagline">Thoughts, ideas, and useful links</p>
+        </header>
+
+        <!-- Main content area -->
+        <main>
+            
+            <!-- About Me section -->
+            <section id="about">
+                <!-- Section heading -->
+                <h2>About Me</h2>
+                <!-- About text - CHANGE THIS to describe yourself -->
+                <p class="about-text">
+                    Hello! I'm passionate about sharing my thoughts and experiences through this blog. 
+                    Here you'll find my latest posts, insights, and a collection of useful resources 
+                    I've discovered along the way. Feel free to explore and connect with me!
+                </p>
+            </section>
+
+            <!-- Blog Posts section -->
+            <section id="blog">
+                <!-- Section heading -->
+                <h2>Latest Blog Posts</h2>
+                
+                <!-- First blog post - CUSTOMIZE OR ADD MORE -->
+                <article class="blog-post">
+                    <!-- Post title -->
+                    <h3>Getting Started with GitHub Pages</h3>
+                    <!-- Post date -->
+                    <p class="blog-date">January 18, 2026</p>
+                    <!-- Post preview/excerpt -->
+                    <p class="blog-excerpt">
+                        Today I launched my new blog on GitHub Pages! It's completely free and surprisingly 
+                        easy to set up. In this post, I'll share my experience and some tips for beginners...
+                    </p>
+                </article>
+
+                <!-- Second blog post - CUSTOMIZE OR ADD MORE -->
+                <article class="blog-post">
+                    <!-- Post title -->
+                    <h3>Why I Started Blogging</h3>
+                    <!-- Post date -->
+                    <p class="blog-date">January 15, 2026</p>
+                    <!-- Post preview/excerpt -->
+                    <p class="blog-excerpt">
+                        Blogging has always intrigued me as a way to document my journey and share knowledge. 
+                        Here's why I finally decided to take the plunge and start my own blog...
+                    </p>
+                </article>
+
+                <!-- Third blog post - CUSTOMIZE OR ADD MORE -->
+                <article class="blog-post">
+                    <!-- Post title -->
+                    <h3>My Favorite Resources for Learning</h3>
+                    <!-- Post date -->
+                    <p class="blog-date">January 10, 2026</p>
+                    <!-- Post preview/excerpt -->
+                    <p class="blog-excerpt">
+                        Over the years, I've discovered some amazing resources that have helped me grow. 
+                        Check out my curated list of websites, courses, and tools below in the links section!
+                    </p>
+                </article>
+            </section>
+
+            <!-- Useful Links section -->
+            <section id="links">
+                <!-- Section heading -->
+                <h2>Useful Links</h2>
+                <!-- Grid container for link cards -->
+                <div class="links-grid">
+                    
+                    <!-- First link card - CHANGE URL and text -->
+                    <a href="https://github.com" class="link-card" target="_blank">
+                        <!-- target="_blank" makes the link open in a new tab -->
+                        <h3>GitHub</h3>
+                        <p>Code hosting platform</p>
+                    </a>
+
+                    <!-- Second link card - CHANGE URL and text -->
+                    <a href="https://stackoverflow.com" class="link-card" target="_blank">
+                        <h3>Stack Overflow</h3>
+                        <p>Developer Q&A community</p>
+                    </a>
+
+                    <!-- Third link card - CHANGE URL and text -->
+                    <a href="https://developer.mozilla.org" class="link-card" target="_blank">
+                        <h3>MDN Web Docs</h3>
+                        <p>Web development resources</p>
+                    </a>
+
+                    <!-- Fourth link card - CHANGE URL and text -->
+                    <a href="https://www.youtube.com" class="link-card" target="_blank">
+                        <h3>YouTube</h3>
+                        <p>Video tutorials</p>
+                    </a>
+
+                    <!-- You can add more link cards by copying the above pattern -->
+                    
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer section (bottom of the page) -->
+        <footer>
+            <!-- Footer text - CHANGE THIS to add your name and year -->
+            <p>&copy; 2026 My Blog. Built with ❤️ using GitHub Pages</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
