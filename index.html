@@ -436,8 +436,11 @@
                 
                 // Check if the request was successful (status code 200 means success)
                 if (!response.ok) {
-                    // If not successful, throw an error
-                    throw new Error('Weather data not available');
+                    // Log the detailed error for debugging
+                    console.error('API Response Status:', response.status);
+                    console.error('API URL:', apiUrl);
+                    // If not successful, throw an error with status code
+                    throw new Error(`Weather API error: ${response.status} - ${response.statusText}`);
                 }
                 
                 // Convert the response to JSON format (JavaScript Object Notation)
