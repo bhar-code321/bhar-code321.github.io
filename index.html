@@ -48,7 +48,7 @@
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Same gradient as body */
             color: white; /* White text */
-            padding: 60px 40px; /* Space inside the header (top/bottom, left/right) */
+            padding: 60px 40px 40px 40px; /* Space inside the header */
             text-align: center; /* Centers the text */
         }
 
@@ -63,6 +63,75 @@
         .tagline {
             font-size: 1.2em; /* Slightly larger than normal text */
             opacity: 0.9; /* Slightly transparent (90% visible) */
+            margin-bottom: 30px; /* Space below tagline */
+        }
+
+        /* Styles for the weather widget container */
+        .weather-widget {
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+            backdrop-filter: blur(10px); /* Blurs the background behind it (glassmorphism effect) */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px; /* Space inside the widget */
+            margin: 0 auto; /* Centers the widget */
+            max-width: 400px; /* Maximum width */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+        }
+
+        /* Styles for the weather location text */
+        .weather-location {
+            font-size: 1.3em; /* Size of location name */
+            font-weight: 600; /* Semi-bold */
+            margin-bottom: 15px; /* Space below */
+        }
+
+        /* Container for weather info (temperature and icon side by side) */
+        .weather-info {
+            display: flex; /* Uses flexbox layout for horizontal arrangement */
+            align-items: center; /* Vertically centers items */
+            justify-content: center; /* Horizontally centers items */
+            gap: 20px; /* Space between temperature and icon */
+        }
+
+        /* Styles for the temperature display */
+        .weather-temp {
+            font-size: 3em; /* Large temperature text */
+            font-weight: 700; /* Bold */
+        }
+
+        /* Styles for the weather icon */
+        .weather-icon {
+            font-size: 3em; /* Large icon */
+        }
+
+        /* Styles for weather description (e.g., "Clear sky", "Cloudy") */
+        .weather-description {
+            font-size: 1.1em; /* Slightly larger text */
+            margin-top: 10px; /* Space above */
+            text-transform: capitalize; /* Capitalizes first letter of each word */
+        }
+
+        /* Styles for additional weather details (humidity, wind) */
+        .weather-details {
+            display: flex; /* Horizontal layout */
+            justify-content: space-around; /* Spreads items evenly */
+            margin-top: 15px; /* Space above */
+            font-size: 0.9em; /* Slightly smaller text */
+        }
+
+        /* Styles for loading message while weather data is being fetched */
+        .weather-loading {
+            text-align: center; /* Centers the text */
+            padding: 20px; /* Space around */
+            font-size: 1.1em; /* Slightly larger text */
+        }
+
+        /* Styles for error message if weather can't be loaded */
+        .weather-error {
+            text-align: center; /* Centers the text */
+            padding: 20px; /* Space around */
+            color: #ff6b6b; /* Red color for errors */
+            background: rgba(255, 255, 255, 0.2); /* Light background */
+            border-radius: 10px; /* Rounded corners */
         }
 
         /* Styles for the main content area */
@@ -176,7 +245,7 @@
         @media (max-width: 600px) {
             /* Smaller header padding on mobile */
             header {
-                padding: 40px 20px;
+                padding: 40px 20px 30px 20px;
             }
 
             /* Smaller main heading on mobile */
@@ -187,6 +256,11 @@
             /* Smaller content padding on mobile */
             main {
                 padding: 20px;
+            }
+
+            /* Smaller weather temperature on mobile */
+            .weather-temp {
+                font-size: 2.5em;
             }
         }
     </style>
@@ -204,6 +278,12 @@
             <h1>Welcome to My Blog</h1>
             <!-- Subtitle - CHANGE THIS to your tagline -->
             <p class="tagline">Thoughts, ideas, and useful links</p>
+            
+            <!-- Weather widget container -->
+            <div class="weather-widget" id="weatherWidget">
+                <!-- This will be filled with weather data by JavaScript -->
+                <div class="weather-loading">Loading weather data...</div>
+            </div>
         </header>
 
         <!-- Main content area -->
@@ -312,6 +392,125 @@
         </footer>
 
     </div>
+
+    <!-- JavaScript code for fetching and displaying weather data -->
+    <script>
+        // This is the main function that fetches weather data
+        async function fetchWeather() {
+            // API key for OpenWeatherMap - YOU NEED TO REPLACE THIS WITH YOUR OWN KEY
+            // Get your free API key at: https://openweathermap.org/api
+            const apiKey = '0416ec46afbe252a8889bf14ff85fd14'; // Your OpenWeatherMap API key
+            
+            // The city we want weather for
+            const city = 'Gurgaon';
+            
+            // The API URL - this is where we get the weather data from
+            // We use template literals (backticks) to insert our variables into the URL
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            
+            // Get the weather widget element from the HTML
+            const weatherWidget = document.getElementById('weatherWidget');
+            
+            try {
+                // Check if API key has been set
+                if (apiKey === 'YOUR_API_KEY_HERE') {
+                    // If API key hasn't been replaced, show instructions
+                    weatherWidget.innerHTML = `
+                        <div class="weather-error">
+                            <p><strong>Weather widget setup needed!</strong></p>
+                            <p style="margin-top: 10px; font-size: 0.9em;">
+                                Get your free API key from 
+                                <a href="https://openweathermap.org/api" target="_blank" style="color: white; text-decoration: underline;">
+                                    OpenWeatherMap
+                                </a>
+                                and replace 'YOUR_API_KEY_HERE' in the code.
+                            </p>
+                        </div>
+                    `;
+                    return; // Exit the function
+                }
+                
+                // fetch() makes a request to the API to get weather data
+                // await means "wait for this to complete before moving to the next line"
+                const response = await fetch(apiUrl);
+                
+                // Check if the request was successful (status code 200 means success)
+                if (!response.ok) {
+                    // If not successful, throw an error
+                    throw new Error('Weather data not available');
+                }
+                
+                // Convert the response to JSON format (JavaScript Object Notation)
+                // This transforms the raw data into a usable JavaScript object
+                const data = await response.json();
+                
+                // Extract the information we need from the data
+                const temp = Math.round(data.main.temp); // Temperature, rounded to nearest whole number
+                const description = data.weather[0].description; // Weather description (e.g., "clear sky")
+                const humidity = data.main.humidity; // Humidity percentage
+                const windSpeed = data.wind.speed; // Wind speed in meters per second
+                const weatherIcon = getWeatherIcon(data.weather[0].main); // Get appropriate emoji icon
+                
+                // Update the weather widget with the fetched data
+                // We use innerHTML to insert HTML content into the widget
+                weatherWidget.innerHTML = `
+                    <div class="weather-location">${city}</div>
+                    <div class="weather-info">
+                        <div class="weather-temp">${temp}°C</div>
+                        <div class="weather-icon">${weatherIcon}</div>
+                    </div>
+                    <div class="weather-description">${description}</div>
+                    <div class="weather-details">
+                        <div>💧 ${humidity}%</div>
+                        <div>💨 ${windSpeed} m/s</div>
+                    </div>
+                `;
+                
+            } catch (error) {
+                // If anything goes wrong (network error, invalid API key, etc.), show an error message
+                console.error('Error fetching weather:', error); // Log error to browser console
+                weatherWidget.innerHTML = `
+                    <div class="weather-error">
+                        Unable to load weather data. Please check your API key and internet connection.
+                    </div>
+                `;
+            }
+        }
+        
+        // This function returns an appropriate emoji icon based on weather condition
+        function getWeatherIcon(weatherMain) {
+            // We use a switch statement to check different weather conditions
+            // and return the matching emoji icon
+            switch(weatherMain.toLowerCase()) {
+                case 'clear':
+                    return '☀️'; // Sun emoji for clear weather
+                case 'clouds':
+                    return '☁️'; // Cloud emoji for cloudy weather
+                case 'rain':
+                    return '🌧️'; // Rain emoji
+                case 'drizzle':
+                    return '🌦️'; // Sun behind rain cloud
+                case 'thunderstorm':
+                    return '⛈️'; // Thunderstorm emoji
+                case 'snow':
+                    return '❄️'; // Snowflake emoji
+                case 'mist':
+                case 'fog':
+                case 'haze':
+                    return '🌫️'; // Fog emoji
+                default:
+                    return '🌤️'; // Default: sun behind small cloud
+            }
+        }
+        
+        // Call the fetchWeather function when the page loads
+        // This ensures weather data is displayed as soon as the page is ready
+        fetchWeather();
+        
+        // Refresh weather data every 10 minutes (600,000 milliseconds)
+        // setInterval runs a function repeatedly at specified intervals
+        setInterval(fetchWeather, 600000);
+    </script>
 
 </body>
 </html>
