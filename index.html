@@ -5,513 +5,510 @@
 
 <head>
     <!-- The <head> section contains information ABOUT the page, not displayed content -->
-    
+
     <!-- This sets the character encoding to UTF-8, which supports all languages and symbols -->
     <meta charset="UTF-8">
-    
+
     <!-- This makes the website responsive (work well on mobile phones and tablets) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- This is what appears in the browser tab -->
-    <title>My Blog & Links</title>
-    
-    <!-- The <style> tag contains all the CSS (styling) for the page -->
+    <title>The Daily Read</title>
+
+    <!-- Google Fonts - Merriweather (close match to The Economist's font) and Source Sans 3 for clean sans-serif text -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* This resets default browser spacing and sets a base font */
+        /* ---------- RESET & BASE ---------- */
+        /* Resets default browser spacing and sets a consistent base */
         * {
-            margin: 0; /* Removes default spacing around elements */
-            padding: 0; /* Removes default inner spacing */
-            box-sizing: border-box; /* Makes width/height calculations easier */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Styles for the entire page body */
+        /* Base styles for the entire page */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sets the font */
-            line-height: 1.6; /* Spacing between lines of text */
-            color: #333; /* Dark gray text color */
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient background */
-            min-height: 100vh; /* Makes sure the page is at least as tall as the screen */
-            padding: 20px; /* Adds space around the edges */
+            font-family: 'Merriweather', Georgia, serif; /* Merriweather - close match to The Economist's serif font */
+            line-height: 1.6;
+            color: #1a1a1a; /* Very dark gray - easier on eyes than pure black */
+            background-color: #f4f1ec; /* Warm off-white background like aged paper */
         }
 
-        /* Styles for the main container that holds all content */
-        .container {
-            max-width: 800px; /* Maximum width of the content area */
-            margin: 0 auto; /* Centers the container horizontally */
-            background: white; /* White background for the content area */
-            border-radius: 20px; /* Rounds the corners */
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3); /* Adds a shadow for depth */
-            overflow: hidden; /* Keeps content from spilling outside rounded corners */
+        /* ---------- TOP NAVIGATION BAR ---------- */
+        /* The thin orange bar at the very top of the page */
+        .top-bar {
+            background-color: #e8732a; /* Orange - our accent color */
+            color: white;
+            padding: 8px 0; /* Thin bar - only 8px top and bottom */
+            text-align: center;
+            font-size: 0.75em; /* Small text */
+            letter-spacing: 2px; /* Spreads letters apart for a modern look */
+            text-transform: uppercase; /* Makes all text UPPERCASE */
         }
 
-        /* Styles for the header (top section) */
+        /* ---------- HEADER ---------- */
+        /* The main header section with the website name */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Same gradient as body */
-            color: white; /* White text */
-            padding: 60px 40px 40px 40px; /* Space inside the header */
-            text-align: center; /* Centers the text */
+            background-color: #ffffff; /* White background */
+            border-bottom: 3px solid #e8732a; /* Orange bottom border - subtle accent */
+            padding: 25px 40px 20px 40px; /* Added left padding to align with content */
+            text-align: left; /* Aligns header content to the left */
         }
 
-        /* Styles for the main heading (your name/blog title) */
-        h1 {
-            font-size: 2.5em; /* Makes the text 2.5 times the normal size */
-            margin-bottom: 10px; /* Space below the heading */
-            font-weight: 700; /* Makes the text bold */
+        /* The main website title */
+        header h1 {
+            font-size: 3.8em; /* Larger title */
+            font-weight: 700;
+            color: #e8732a; /* Orange matching the top bar */
+            letter-spacing: 4px; /* Spread letters for an elegant look */
+            text-transform: uppercase; /* All caps */
+            font-family: 'Merriweather', Georgia, serif; /* Same serif font as the body */
+            margin: 0; /* Remove any default margins */
+            line-height: 1.2; /* Tighter line height */
         }
 
-        /* Styles for the subtitle/tagline */
-        .tagline {
-            font-size: 1.2em; /* Slightly larger than normal text */
-            opacity: 0.9; /* Slightly transparent (90% visible) */
-            margin-bottom: 30px; /* Space below tagline */
+        /* The tagline below the title */
+        .header-tagline {
+            font-size: 0.85em;
+            color: #777; /* Gray color */
+            margin-top: 8px;
+            font-style: italic; /* Slanted text */
+            letter-spacing: 1px;
         }
 
-        /* Styles for the weather widget container */
+        /* ---------- WEATHER WIDGET (SMALL) ---------- */
+        /* The weather widget box itself */
         .weather-widget {
-            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
-            backdrop-filter: blur(10px); /* Blurs the background behind it (glassmorphism effect) */
-            border-radius: 15px; /* Rounded corners */
-            padding: 20px; /* Space inside the widget */
-            margin: 0 auto; /* Centers the widget */
-            max-width: 400px; /* Maximum width */
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
-        }
-
-        /* Styles for the weather location text */
-        .weather-location {
-            font-size: 1.3em; /* Size of location name */
-            font-weight: 600; /* Semi-bold */
-            margin-bottom: 15px; /* Space below */
-        }
-
-        /* Container for weather info (temperature and icon side by side) */
-        .weather-info {
-            display: flex; /* Uses flexbox layout for horizontal arrangement */
+            display: flex; /* Puts all weather items in a row */
             align-items: center; /* Vertically centers items */
-            justify-content: center; /* Horizontally centers items */
-            gap: 20px; /* Space between temperature and icon */
+            gap: 10px; /* Space between each item */
+            padding: 6px 12px; /* Small padding inside */
+            background-color: #faf8f5; /* Very light warm background */
+            border-radius: 6px; /* Slightly rounded corners */
+            border: 1px solid #e0dbd4; /* Subtle border */
+            white-space: nowrap; /* Prevents weather items from wrapping */
+            margin: 0 auto; /* Centers the widget horizontally */
         }
 
-        /* Styles for the temperature display */
+        /* The location name (Gurgaon) */
+        .weather-location {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* A vertical divider line between location and temperature */
+        .weather-divider {
+            width: 1px;
+            height: 18px;
+            background-color: #ccc;
+        }
+
+        /* The temperature number */
         .weather-temp {
-            font-size: 3em; /* Large temperature text */
-            font-weight: 700; /* Bold */
+            font-size: 1em;
+            font-weight: 700;
+            color: #1a1a1a;
         }
 
-        /* Styles for the weather icon */
+        /* The weather emoji icon */
         .weather-icon {
-            font-size: 3em; /* Large icon */
+            font-size: 1.8em; /* Bigger icon */
         }
 
-        /* Styles for weather description (e.g., "Clear sky", "Cloudy") */
+        /* The weather description text (e.g., "Clear sky") */
         .weather-description {
-            font-size: 1.1em; /* Slightly larger text */
-            margin-top: 10px; /* Space above */
-            text-transform: capitalize; /* Capitalizes first letter of each word */
+            font-size: 0.75em;
+            color: #666;
+            text-transform: capitalize;
         }
 
-        /* Styles for additional weather details (humidity, wind) */
+        /* Humidity and wind info */
         .weather-details {
-            display: flex; /* Horizontal layout */
-            justify-content: space-around; /* Spreads items evenly */
-            margin-top: 15px; /* Space above */
-            font-size: 0.9em; /* Slightly smaller text */
+            font-size: 0.75em;
+            color: #888;
+            display: flex;
+            gap: 10px;
         }
 
-        /* Styles for loading message while weather data is being fetched */
-        .weather-loading {
-            text-align: center; /* Centers the text */
-            padding: 20px; /* Space around */
-            font-size: 1.1em; /* Slightly larger text */
+        /* Loading and error messages for weather */
+        .weather-loading, .weather-error {
+            font-size: 0.8em;
+            color: #666;
         }
 
-        /* Styles for error message if weather can't be loaded */
         .weather-error {
-            text-align: center; /* Centers the text */
-            padding: 20px; /* Space around */
-            color: #ff6b6b; /* Red color for errors */
-            background: rgba(255, 255, 255, 0.2); /* Light background */
-            border-radius: 10px; /* Rounded corners */
+            color: #c0392b; /* Red for errors */
         }
 
-        /* Styles for the main content area */
-        main {
-            padding: 40px; /* Space inside the main content area */
+        /* ---------- MAIN CONTENT AREA ---------- */
+        /* Centers and limits the width of the main content */
+        .content-wrapper {
+            max-width: 900px; /* Maximum width */
+            margin: 0 auto; /* Centers horizontally */
+            padding: 35px 20px; /* Space around the content */
         }
 
-        /* Styles for section headings (like "About Me", "Blog Posts") */
-        h2 {
-            color: #667eea; /* Purple color matching the theme */
-            margin-bottom: 20px; /* Space below the heading */
-            font-size: 1.8em; /* Size of the heading */
-            border-bottom: 3px solid #667eea; /* Underline effect */
-            padding-bottom: 10px; /* Space between text and underline */
+        /* ---------- SECTION HEADING ---------- */
+        /* The "Interesting Articles" heading */
+        .section-heading {
+            display: flex; /* Puts the text and line side by side */
+            align-items: center; /* Vertically centers them */
+            margin-bottom: 30px; /* Space below the heading */
+            gap: 15px; /* Space between text and line */
         }
 
-        /* Styles for sections (About, Blog Posts, Links) */
-        section {
-            margin-bottom: 40px; /* Space between sections */
+        /* The heading text itself */
+        .section-heading h2 {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: #e8732a; /* Orange color - our accent */
+            text-transform: uppercase; /* ALL CAPS */
+            letter-spacing: 3px; /* Spread letters apart */
+            white-space: nowrap; /* Prevents the text from wrapping to the next line */
         }
 
-        /* Styles for the about text paragraph */
-        .about-text {
-            font-size: 1.1em; /* Slightly larger than normal */
-            color: #555; /* Medium gray color */
-            line-height: 1.8; /* Extra space between lines for readability */
+        /* The horizontal line next to the heading */
+        .section-heading .line {
+            flex: 1; /* Takes up all remaining space */
+            height: 1px; /* Thin line */
+            background-color: #d4cfc8; /* Light warm gray */
         }
 
-        /* Styles for individual blog post cards */
-        .blog-post {
-            background: #f8f9fa; /* Light gray background */
-            padding: 25px; /* Space inside the card */
-            margin-bottom: 20px; /* Space between blog posts */
-            border-radius: 10px; /* Rounded corners */
-            border-left: 4px solid #667eea; /* Purple accent line on the left */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation when hovering */
+        /* ---------- ARTICLE CARDS ---------- */
+        /* Each article card container */
+        .article-card {
+            background-color: #ffffff; /* White background */
+            border-bottom: 1px solid #e0dbd4; /* Subtle divider between articles */
+            padding: 25px 0; /* Space top and bottom */
+            transition: background-color 0.2s ease; /* Smooth color change on hover */
+            cursor: pointer; /* Shows a hand cursor when hovering - indicates it's clickable */
         }
 
-        /* What happens when you hover over a blog post */
-        .blog-post:hover {
-            transform: translateY(-5px); /* Moves the card up slightly */
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Adds a shadow */
+        /* Remove border from the last article (no border needed at the bottom) */
+        .article-card:last-child {
+            border-bottom: none;
         }
 
-        /* Styles for blog post titles */
-        .blog-post h3 {
-            color: #333; /* Dark gray */
-            margin-bottom: 10px; /* Space below the title */
-            font-size: 1.4em; /* Size of the title */
+        /* Hover effect - very subtle background change */
+        .article-card:hover {
+            background-color: #faf8f5; /* Slightly darker warm white */
         }
 
-        /* Styles for blog post dates */
-        .blog-date {
+        /* The link wrapping each article - removes default link styling */
+        .article-card a {
+            text-decoration: none; /* Removes the underline from links */
+            color: inherit; /* Inherits the color from parent (dark gray) */
+            display: block; /* Makes the entire card clickable, not just the text */
+        }
+
+        /* The category label (e.g., "TECHNOLOGY", "POLITICS") */
+        .article-category {
+            font-size: 0.7em;
+            font-weight: 700;
+            color: #e8732a; /* Orange accent */
+            text-transform: uppercase; /* ALL CAPS */
+            letter-spacing: 2px; /* Spread letters */
+            margin-bottom: 8px; /* Space below the category */
+            font-family: 'Source Sans 3', Arial, sans-serif; /* Clean sans-serif for the category label - matches The Economist's contrast between serif and sans-serif */
+        }
+
+        /* The article title */
+        .article-title {
+            font-size: 1.4em; /* Larger text */
+            font-weight: 700;
+            color: #1a1a1a; /* Dark color */
+            line-height: 1.4; /* Tighter line spacing for headings */
+            margin-bottom: 10px; /* Space below title */
+            transition: color 0.2s ease; /* Smooth color change on hover */
+        }
+
+        /* Hover effect on the title - turns orange */
+        .article-card:hover .article-title {
+            color: #e8732a; /* Orange on hover */
+        }
+
+        /* The short description/excerpt of the article */
+        .article-excerpt {
+            font-size: 0.9em;
+            color: #555; /* Medium gray */
+            line-height: 1.7; /* Comfortable reading spacing */
+            margin-bottom: 10px;
+        }
+
+        /* The metadata row (date and source) */
+        .article-meta {
+            font-size: 0.75em;
             color: #888; /* Light gray */
-            font-size: 0.9em; /* Smaller than normal text */
-            margin-bottom: 10px; /* Space below the date */
+            font-family: 'Arial', sans-serif; /* Sans-serif for metadata */
+            display: flex; /* Puts date and source side by side */
+            gap: 15px; /* Space between them */
         }
 
-        /* Styles for blog post preview text */
-        .blog-excerpt {
-            color: #666; /* Medium gray */
-            line-height: 1.6; /* Space between lines */
-        }
-
-        /* Styles for the links section */
-        .links-grid {
-            display: grid; /* Uses CSS Grid layout */
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Creates responsive columns */
-            gap: 15px; /* Space between link cards */
-        }
-
-        /* Styles for individual link cards */
-        .link-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+        /* A small badge that appears next to the category for podcasts */
+        .badge {
+            display: inline-block; /* Makes it sit inline with the category text */
+            background-color: #e8732a; /* Orange background */
             color: white; /* White text */
-            padding: 20px; /* Space inside the card */
-            border-radius: 10px; /* Rounded corners */
-            text-align: center; /* Centers the text */
-            text-decoration: none; /* Removes underline from links */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
-            display: block; /* Makes the entire card clickable */
+            font-size: 0.65em; /* Small text */
+            padding: 2px 7px; /* Small space inside the badge */
+            border-radius: 10px; /* Rounded pill shape */
+            margin-left: 8px; /* Space between category and badge */
+            font-weight: 600; /* Semi-bold */
+            letter-spacing: 0.5px;
+            vertical-align: middle; /* Aligns vertically with the category text */
         }
-
-        /* What happens when you hover over a link card */
-        .link-card:hover {
-            transform: translateY(-5px); /* Moves up */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Adds shadow */
-        }
-
-        /* Styles for link card titles */
-        .link-card h3 {
-            margin-bottom: 5px; /* Space below title */
-            font-size: 1.2em; /* Size of title */
-        }
-
-        /* Styles for link card descriptions */
-        .link-card p {
-            font-size: 0.9em; /* Smaller text */
-            opacity: 0.9; /* Slightly transparent */
-        }
-
-        /* Styles for the footer */
+        /* The bottom section of the page */
         footer {
-            background: #f8f9fa; /* Light gray background */
-            text-align: center; /* Centers the text */
-            padding: 30px; /* Space inside footer */
-            color: #666; /* Medium gray text */
+            background-color: #1a1a1a; /* Very dark background */
+            color: #999; /* Gray text */
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 20px;
         }
 
-        /* Makes the website responsive on small screens (phones) */
+        /* The website name in the footer */
+        footer .footer-title {
+            font-size: 1.2em;
+            color: #ffffff; /* White text */
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        /* The copyright text */
+        footer p {
+            font-size: 0.75em;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* ---------- RESPONSIVE (MOBILE) ---------- */
+        /* Adjustments for screens smaller than 600px (phones) */
         @media (max-width: 600px) {
-            /* Smaller header padding on mobile */
-            header {
-                padding: 40px 20px 30px 20px;
-            }
-
-            /* Smaller main heading on mobile */
-            h1 {
+            /* Smaller title on mobile */
+            header h1 {
                 font-size: 2em;
+                letter-spacing: 2px;
             }
 
-            /* Smaller content padding on mobile */
-            main {
-                padding: 20px;
+            /* Stack weather items vertically on very small screens */
+            .weather-widget {
+                flex-wrap: wrap; /* Allows items to wrap to next line */
+                justify-content: center; /* Centers wrapped items */
+                gap: 10px;
             }
 
-            /* Smaller weather temperature on mobile */
-            .weather-temp {
-                font-size: 2.5em;
+            /* Smaller article title on mobile */
+            .article-title {
+                font-size: 1.2em;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- This is where the visible content starts -->
-    
-    <!-- Main container for all content -->
-    <div class="container">
-        
-        <!-- Header section (top of the page) -->
-        <header>
-            <!-- Main title - CHANGE THIS to your name or blog title -->
-            <h1>Welcome to My Blog</h1>
-            <!-- Subtitle - CHANGE THIS to your tagline -->
-            <p class="tagline">Thoughts, ideas, and useful links</p>
-            
-            <!-- Weather widget container -->
-            <div class="weather-widget" id="weatherWidget">
-                <!-- This will be filled with weather data by JavaScript -->
-                <div class="weather-loading">Loading weather data...</div>
-            </div>
-        </header>
 
-        <!-- Main content area -->
-        <main>
-            
-            <!-- About Me section -->
-            <section id="about">
-                <!-- Section heading -->
-                <h2>About Me</h2>
-                <!-- About text - CHANGE THIS to describe yourself -->
-                <p class="about-text">
-                    Hello! I'm passionate about sharing my thoughts and experiences through this blog. 
-                    Here you'll find my latest posts, insights, and a collection of useful resources 
-                    I've discovered along the way. Feel free to explore and connect with me!
+    <!-- THIN ORANGE BAR AT THE TOP -->
+    <div class="top-bar">
+        Science &nbsp; | &nbsp; AI &nbsp; | &nbsp; Business &nbsp; | &nbsp; Tech
+    </div>
+
+    <!-- HEADER - Website name and tagline -->
+    <header>
+        <!-- Main website title - CHANGE THIS to your own name -->
+                    <h1>The Lens</h1>
+        <!-- Tagline - CHANGE THIS -->
+        <p class="header-tagline">Curated articles for the curious mind</p>
+    </header>
+
+    <!-- WEATHER WIDGET - Small, compact, sits below the header -->
+    <div class="weather-container">
+        <div class="weather-widget" id="weatherWidget">
+            <!-- This will be filled by JavaScript with live weather data -->
+            <div class="weather-loading">Loading weather...</div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="content-wrapper">
+
+        <!-- SECTION HEADING with decorative line -->
+        <div class="section-heading">
+            <h2>Interesting Articles</h2>
+            <div class="line"></div>
+        </div>
+
+        <!-- ARTICLE 1 -->
+        <div class="article-card">
+            <a href="https://worksinprogress.co/issue/how-mathematics-built-the-modern-world/" target="_blank">
+                <!-- target="_blank" opens in a new tab -->
+                <!-- Category label -->
+                <div class="article-category">Science</div>
+                <!-- Article title - original title from the source -->
+                <h3 class="article-title">How mathematics built the modern world</h3>
+                <!-- Short description - a brief summary of what the article covers -->
+                <p class="article-excerpt">
+                    Mathematics was the cornerstone of the Industrial Revolution. A new paradigm of measurement and calculation, more than scientific discovery, built industry, modernity, and the world we inhabit today.
                 </p>
-            </section>
-
-            <!-- Blog Posts section -->
-            <section id="blog">
-                <!-- Section heading -->
-                <h2>Latest Blog Posts</h2>
-                
-                <!-- First blog post - CUSTOMIZE OR ADD MORE -->
-                <article class="blog-post">
-                    <!-- Post title -->
-                    <h3>Getting Started with GitHub Pages</h3>
-                    <!-- Post date -->
-                    <p class="blog-date">January 18, 2026</p>
-                    <!-- Post preview/excerpt -->
-                    <p class="blog-excerpt">
-                        Today I launched my new blog on GitHub Pages! It's completely free and surprisingly 
-                        easy to set up. In this post, I'll share my experience and some tips for beginners...
-                    </p>
-                </article>
-
-                <!-- Second blog post - CUSTOMIZE OR ADD MORE -->
-                <article class="blog-post">
-                    <!-- Post title -->
-                    <h3>Why I Started Blogging</h3>
-                    <!-- Post date -->
-                    <p class="blog-date">January 15, 2026</p>
-                    <!-- Post preview/excerpt -->
-                    <p class="blog-excerpt">
-                        Blogging has always intrigued me as a way to document my journey and share knowledge. 
-                        Here's why I finally decided to take the plunge and start my own blog...
-                    </p>
-                </article>
-
-                <!-- Third blog post - CUSTOMIZE OR ADD MORE -->
-                <article class="blog-post">
-                    <!-- Post title -->
-                    <h3>My Favorite Resources for Learning</h3>
-                    <!-- Post date -->
-                    <p class="blog-date">January 10, 2026</p>
-                    <!-- Post preview/excerpt -->
-                    <p class="blog-excerpt">
-                        Over the years, I've discovered some amazing resources that have helped me grow. 
-                        Check out my curated list of websites, courses, and tools below in the links section!
-                    </p>
-                </article>
-            </section>
-
-            <!-- Useful Links section -->
-            <section id="links">
-                <!-- Section heading -->
-                <h2>Useful Links</h2>
-                <!-- Grid container for link cards -->
-                <div class="links-grid">
-                    
-                    <!-- First link card - CHANGE URL and text -->
-                    <a href="https://github.com" class="link-card" target="_blank">
-                        <!-- target="_blank" makes the link open in a new tab -->
-                        <h3>GitHub</h3>
-                        <p>Code hosting platform</p>
-                    </a>
-
-                    <!-- Second link card - CHANGE URL and text -->
-                    <a href="https://stackoverflow.com" class="link-card" target="_blank">
-                        <h3>Stack Overflow</h3>
-                        <p>Developer Q&A community</p>
-                    </a>
-
-                    <!-- Third link card - CHANGE URL and text -->
-                    <a href="https://developer.mozilla.org" class="link-card" target="_blank">
-                        <h3>MDN Web Docs</h3>
-                        <p>Web development resources</p>
-                    </a>
-
-                    <!-- Fourth link card - CHANGE URL and text -->
-                    <a href="https://www.youtube.com" class="link-card" target="_blank">
-                        <h3>YouTube</h3>
-                        <p>Video tutorials</p>
-                    </a>
-
-                    <!-- You can add more link cards by copying the above pattern -->
-                    
+                <!-- Metadata - publication date and source -->
+                <div class="article-meta">
+                    <span>November 15, 2023</span>
+                    <span>Source: Works in Progress Magazine</span>
                 </div>
-            </section>
+            </a>
+        </div>
 
-        </main>
+        <!-- ARTICLE 2 - PLACEHOLDER -->
+        <div class="article-card">
+            <a href="https://the-ken.com/podcasts/zero-shot/googles-on-the-drivers-seat-in-the-ai-race-who-could-trip-it/" target="_blank">
+                <div class="article-category">AI <span class="badge">🎧 Podcast</span></div>
+                <h3 class="article-title">Google's on the driver's seat in the AI race. Who could trip it?</h3>
+                <p class="article-excerpt">
+                    Brady, Praveen, and Rohin from The Ken's Zero Shot podcast discuss Google's dominant position in the AI race and explore what it would take for competitors to challenge or overtake them.
+                </p>
+                <div class="article-meta">
+                    <span>Source: Zero Shot by The Ken</span>
+                </div>
+            </a>
+        </div>
 
-        <!-- Footer section (bottom of the page) -->
-        <footer>
-            <!-- Footer text - CHANGE THIS to add your name and year -->
-            <p>&copy; 2026 My Blog. Built with ❤️ using GitHub Pages</p>
-        </footer>
+        <!-- ARTICLE 3 -->
+        <div class="article-card">
+            <a href="https://stratechery.com/2026/tsmc-risk/" target="_blank">
+                <div class="article-category">Business</div>
+                <h3 class="article-title">TSMC Risk</h3>
+                <p class="article-excerpt">
+                    TSMC's conservative investment strategy is acting as a brake on the entire AI industry. As hyperscalers spend billions expanding capacity, the world's most critical chip manufacturer is holding back — and the cost of that caution is already being felt.
+                </p>
+                <div class="article-meta">
+                    <span>January 26, 2026</span>
+                    <span>Source: Stratechery by Ben Thompson</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- ARTICLE 4 -->
+        <div class="article-card">
+            <a href="https://stratechery.com/2026/apple-you-still-dont-understand-the-vision-pro/" target="_blank">
+                <div class="article-category">Tech</div>
+                <h3 class="article-title">Apple: You (Still) Don't Understand the Vision Pro</h3>
+                <p class="article-excerpt">
+                    Despite Apple's efforts to bring live sports to the Vision Pro, Ben Thompson argues that the company keeps repeating the same mistake — producing immersive content like traditional TV instead of leveraging what makes the device truly special: the feeling of actually being there.
+                </p>
+                <div class="article-meta">
+                    <span>January 12, 2026</span>
+                    <span>Source: Stratechery by Ben Thompson</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- TO ADD MORE ARTICLES: Copy any article-card block above and paste it here -->
 
     </div>
 
-    <!-- JavaScript code for fetching and displaying weather data -->
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-title">The Lens</div>
+        <!-- CHANGE this to your name -->
+        <p>&copy; 2026 The Daily Read. All rights reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT FOR WEATHER -->
     <script>
-        // This is the main function that fetches weather data
+        // Main function that fetches live weather data from OpenWeatherMap
         async function fetchWeather() {
-            // API key for OpenWeatherMap - YOU NEED TO REPLACE THIS WITH YOUR OWN KEY
-            // Get your free API key at: https://openweathermap.org/api
-            const apiKey = '0416ec46afbe252a8889bf14ff85fd14'; // Your OpenWeatherMap API key
-            
+            // Your OpenWeatherMap API key
+            const apiKey = '0416ec46afbe252a8889bf14ff85fd14';
+
             // The city we want weather for
             const city = 'Gurgaon';
-            
-            // The API URL - this is where we get the weather data from
-            // We use template literals (backticks) to insert our variables into the URL
+
+            // The API URL - combines the base address with our city, key, and units
             const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-            
+
             // Get the weather widget element from the HTML
             const weatherWidget = document.getElementById('weatherWidget');
-            
+
             try {
-                // Check if API key has been set
-                if (apiKey === 'YOUR_API_KEY_HERE') {
-                    // If API key hasn't been replaced, show instructions
-                    weatherWidget.innerHTML = `
-                        <div class="weather-error">
-                            <p><strong>Weather widget setup needed!</strong></p>
-                            <p style="margin-top: 10px; font-size: 0.9em;">
-                                Get your free API key from 
-                                <a href="https://openweathermap.org/api" target="_blank" style="color: white; text-decoration: underline;">
-                                    OpenWeatherMap
-                                </a>
-                                and replace 'YOUR_API_KEY_HERE' in the code.
-                            </p>
-                        </div>
-                    `;
-                    return; // Exit the function
-                }
-                
-                // fetch() makes a request to the API to get weather data
-                // await means "wait for this to complete before moving to the next line"
+                // fetch() sends a request to OpenWeatherMap to get weather data
+                // await waits for the response before continuing
                 const response = await fetch(apiUrl);
-                
-                // Check if the request was successful (status code 200 means success)
+
+                // Check if the request was successful
                 if (!response.ok) {
-                    // Log the detailed error for debugging
                     console.error('API Response Status:', response.status);
-                    console.error('API URL:', apiUrl);
-                    // If not successful, throw an error with status code
-                    throw new Error(`Weather API error: ${response.status} - ${response.statusText}`);
+                    throw new Error(`Weather API error: ${response.status}`);
                 }
-                
-                // Convert the response to JSON format (JavaScript Object Notation)
-                // This transforms the raw data into a usable JavaScript object
+
+                // Convert the response into a usable JavaScript object
                 const data = await response.json();
-                
-                // Extract the information we need from the data
-                const temp = Math.round(data.main.temp); // Temperature, rounded to nearest whole number
-                const description = data.weather[0].description; // Weather description (e.g., "clear sky")
+
+                // Extract the specific values we need from the data
+                const temp = Math.round(data.main.temp); // Temperature rounded to whole number
+                const description = data.weather[0].description; // e.g., "clear sky"
                 const humidity = data.main.humidity; // Humidity percentage
-                const windSpeed = data.wind.speed; // Wind speed in meters per second
-                const weatherIcon = getWeatherIcon(data.weather[0].main); // Get appropriate emoji icon
-                
-                // Update the weather widget with the fetched data
-                // We use innerHTML to insert HTML content into the widget
+                const windSpeed = data.wind.speed; // Wind speed in m/s
+                const weatherIcon = getWeatherIcon(data.weather[0].main); // Get emoji icon
+
+                // Update the weather widget with a compact horizontal layout
                 weatherWidget.innerHTML = `
                     <div class="weather-location">${city}</div>
-                    <div class="weather-info">
+                    <div class="weather-divider"></div>
+                    <div class="weather-icon">${weatherIcon}</div>
+                    <div>
                         <div class="weather-temp">${temp}°C</div>
-                        <div class="weather-icon">${weatherIcon}</div>
+                        <div class="weather-description">${description}</div>
                     </div>
-                    <div class="weather-description">${description}</div>
+                    <div class="weather-divider"></div>
                     <div class="weather-details">
-                        <div>💧 ${humidity}%</div>
-                        <div>💨 ${windSpeed} m/s</div>
+                        <span>💧 ${humidity}%</span>
+                        <span>💨 ${windSpeed} m/s</span>
                     </div>
                 `;
-                
+
             } catch (error) {
-                // If anything goes wrong (network error, invalid API key, etc.), show an error message
-                console.error('Error fetching weather:', error); // Log error to browser console
+                // If the API call fails (e.g., blocked in previews), show a static fallback
+                // This fallback will be replaced by live data on your GitHub Pages site
+                console.error('Error fetching weather:', error);
                 weatherWidget.innerHTML = `
-                    <div class="weather-error">
-                        Unable to load weather data. Please check your API key and internet connection.
+                    <div class="weather-location">GURGAON</div>
+                    <div class="weather-divider"></div>
+                    <div class="weather-icon">☁️</div>
+                    <div>
+                        <div class="weather-temp">13°C</div>
+                        <div class="weather-description">Cloudy</div>
+                    </div>
+                    <div class="weather-divider"></div>
+                    <div class="weather-details">
+                        <span>💧 --</span>
+                        <span>💨 -- m/s</span>
                     </div>
                 `;
             }
         }
-        
-        // This function returns an appropriate emoji icon based on weather condition
+
+        // Returns an emoji icon based on the weather condition from the API
         function getWeatherIcon(weatherMain) {
-            // We use a switch statement to check different weather conditions
-            // and return the matching emoji icon
-            switch(weatherMain.toLowerCase()) {
-                case 'clear':
-                    return '☀️'; // Sun emoji for clear weather
-                case 'clouds':
-                    return '☁️'; // Cloud emoji for cloudy weather
-                case 'rain':
-                    return '🌧️'; // Rain emoji
-                case 'drizzle':
-                    return '🌦️'; // Sun behind rain cloud
-                case 'thunderstorm':
-                    return '⛈️'; // Thunderstorm emoji
-                case 'snow':
-                    return '❄️'; // Snowflake emoji
+            switch (weatherMain.toLowerCase()) {
+                case 'clear':       return '☀️';
+                case 'clouds':      return '☁️';
+                case 'rain':        return '🌧️';
+                case 'drizzle':     return '🌦️';
+                case 'thunderstorm': return '⛈️';
+                case 'snow':        return '❄️';
                 case 'mist':
                 case 'fog':
-                case 'haze':
-                    return '🌫️'; // Fog emoji
-                default:
-                    return '🌤️'; // Default: sun behind small cloud
+                case 'haze':        return '🌫️';
+                default:            return '🌤️';
             }
         }
-        
-        // Call the fetchWeather function when the page loads
-        // This ensures weather data is displayed as soon as the page is ready
+
+        // Run fetchWeather when the page loads
         fetchWeather();
-        
-        // Refresh weather data every 10 minutes (600,000 milliseconds)
-        // setInterval runs a function repeatedly at specified intervals
+
+        // Auto-refresh weather every 10 minutes (600,000 milliseconds)
         setInterval(fetchWeather, 600000);
     </script>
 
